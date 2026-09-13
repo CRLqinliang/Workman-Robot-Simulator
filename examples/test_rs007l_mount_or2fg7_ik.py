@@ -14,7 +14,7 @@ if __name__ == "__main__":
     base = wvw.World(cam_pos=(1.8, 1.2, 1.4), cam_lookat_pos=(0.0, 0.0, 0.5))
     builtins.base = base
     scene = base.scene
-    wssop.frame().add_to_scene(scene)
+    wssop.coord_frame().add_to_scene(scene)
 
     robot = wrmkr7.RS007L(rotmat=wum.rotmat_from_euler(0, 0, -np.pi / 2))
     robot.add_to_scene(scene)
@@ -40,7 +40,7 @@ if __name__ == "__main__":
     for i, d in enumerate(dirs):
         # Use each icosphere vertex direction as target TCP +Z direction.
         tgt_rotmat = wum.rotmat_from_normal(d)
-        wssop.frame(pos=tgt_pos, rotmat=tgt_rotmat, color_mat=wuc.CoordColor.DYO, alpha=0.2).add_to_scene(scene)
+        wssop.coord_frame(pos=tgt_pos, rotmat=tgt_rotmat, color_mat=wuc.CoordColor.DYO, alpha=0.2).add_to_scene(scene)
         _s = robot.ik(tgt_pos, tgt_rotmat, tcp=gripper.tcp('grasp_center'), max_solutions=1)
         qs = _s[0] if _s else None
         if qs is None:
@@ -50,7 +50,7 @@ if __name__ == "__main__":
         tmp_robot.fk(qs=qs)
         tmp_robot.add_to_scene(base.scene)
         tmp_robot.alpha = .3
-        wssop.frame(
+        wssop.coord_frame(
             pos=tmp_robot.tcp('flange').tf[:3, 3],
             rotmat=tmp_robot.tcp('flange').tf[:3, :3],
             color_mat=wuc.CoordColor.MYC,

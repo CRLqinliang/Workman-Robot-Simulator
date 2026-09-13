@@ -160,7 +160,7 @@ if __name__ == '__main__':
     import wrs.viewer.world as wvw
 
     base = wvw.World(cam_pos=(0.45, 0.0, 0.25), cam_lookat_pos=(0.0, 0.0, 0.08))
-    wssop.frame().add_to_scene(base.scene)
+    wssop.coord_frame().add_to_scene(base.scene)
 
     # place the two hands apart in y so they don't overlap
     left = O6Left(pos=np.array([0.0, 0.12, 0.0], dtype=np.float32))

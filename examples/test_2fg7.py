@@ -3,7 +3,7 @@ from wrs import wvw, wuc, wssop, or_2fg7
 
 base = wvw.World(cam_pos=(.5, .5, .5), cam_lookat_pos=(0, 0, .2),
                 toggle_auto_cam_orbit=True)
-oframe = wssop.frame().add_to_scene(base.scene)
+oframe = wssop.coord_frame().add_to_scene(base.scene)
 gripper = or_2fg7.OR2FG7()
 #
 # gripper.toggle_render_collision = True

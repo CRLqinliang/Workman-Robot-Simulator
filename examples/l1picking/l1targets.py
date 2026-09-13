@@ -38,16 +38,16 @@ def main():
 
     base = wvw.World(cam_pos=(1.5, -0.4, 1.4), cam_lookat_pos=(0.15, 0.2, 1.0))
     builtins.base = base
-    wssop.frame().add_to_scene(base.scene)               # world frame
+    wssop.coord_frame().add_to_scene(base.scene)               # world frame
     for e in (robot, *table, cyl, ground):
         e.add_to_scene(base.scene)
 
     # grasp target frames (RGB), pre-grasp frames faint
     for grasp in grasps:
         pose, pre = grasp.pose, grasp.pre_pose
-        wssop.frame(pos=pose[:3, 3], rotmat=pose[:3, :3],
+        wssop.coord_frame(pos=pose[:3, 3], rotmat=pose[:3, :3],
                     length_scale=0.22).add_to_scene(base.scene)
-        f = wssop.frame(pos=pre[:3, 3], rotmat=pre[:3, :3], length_scale=0.16)
+        f = wssop.coord_frame(pos=pre[:3, 3], rotmat=pre[:3, :3], length_scale=0.16)
         f.alpha = 0.3
         f.add_to_scene(base.scene)
 
@@ -57,7 +57,7 @@ def main():
                           jaw.grasp_center_tcp(jw0).loc_tf)
     tf = center_tcp.tf
     print("robot grasp-center tcp (home) pos:", np.round(tf[:3, 3], 3))
-    wssop.frame(pos=tf[:3, 3], rotmat=tf[:3, :3], length_scale=0.6,
+    wssop.coord_frame(pos=tf[:3, 3], rotmat=tf[:3, :3], length_scale=0.6,
                 color_mat=wuc.CoordColor.MYC).add_to_scene(base.scene)
 
     base.run()

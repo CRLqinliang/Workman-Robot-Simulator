@@ -4,7 +4,7 @@ from wrs import wum, wvw, wssop, khi_rs007l
 base = wvw.World(cam_pos=(1.6, .3, .7), cam_lookat_pos=(0, 0, .45),
                 toggle_auto_cam_orbit=False)
 # world origin
-oframe = wssop.frame().add_to_scene(base.scene)
+oframe = wssop.coord_frame().add_to_scene(base.scene)
 base_pos1 = np.array([0, 0.5, 0])
 base_rotmat = wum.rotmat_from_euler(0, 0, -np.pi / 2)
 # robot 1 (left robot)
@@ -21,7 +21,7 @@ robot2.toggle_render_collision = False
 # goal1
 tgt1_rotmat = wum.rotmat_from_euler(-wum.pi / 2, 0, 0)
 tgt1_pos = np.array([0.3, 0, 0.5])
-g1frame = wssop.frame(rotmat=tgt1_rotmat, pos=tgt1_pos)
+g1frame = wssop.coord_frame(rotmat=tgt1_rotmat, pos=tgt1_pos)
 g1frame.add_to_scene(base.scene)
 qs1_list = robot1.ik(tgt1_pos, tgt1_rotmat)
 for qs in qs1_list:
@@ -31,7 +31,7 @@ for qs in qs1_list:
 # goal2
 tgt2_rotmat = wum.rotmat_from_euler(wum.pi / 2, 0, 0)
 tgt2_pos = np.array([0.3, 0, 0.5])
-g2frame = wssop.frame(rotmat=tgt2_rotmat, pos=tgt2_pos)
+g2frame = wssop.coord_frame(rotmat=tgt2_rotmat, pos=tgt2_pos)
 g2frame.add_to_scene(base.scene)
 qs2_list = robot2.ik(tgt2_pos, tgt2_rotmat)
 for qs in qs2_list:

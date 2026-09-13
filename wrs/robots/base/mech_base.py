@@ -270,7 +270,7 @@ class MechBase:
             return None
         if color_mat is None:
             color_mat = wuc.CoordColor.MYC
-        f = wssop.frame(color_mat=color_mat, **kwargs)
+        f = wssop.coord_frame(color_mat=color_mat, **kwargs)
         # mounted at the tcp's offset on the tcp's link, so it follows the robot.
         # It carries no collider, so the weld costs nothing beyond the transform.
         self.mount(f, tcp.parent_lnk, tcp.loc_tf, update=True)

@@ -37,7 +37,7 @@ def main(primitive='pinch'):
     base = wvw.World(cam_pos=(0.28, 0.22, 0.18), cam_lookat_pos=(0.0, 0.0, 0.02))
     # length_scale shrinks the shaft; radius_scale must shrink the head too,
     # else the (unscaled) head fills the whole arrow and only tips show.
-    wssop.frame(length_scale=0.2, radius_scale=0.25).add_to_scene(base.scene)
+    wssop.coord_frame(length_scale=0.2, radius_scale=0.25).add_to_scene(base.scene)
 
     # present the O6 left hand as a parallel jaw for this grasp primitive
     grasper = o6.O6Left().as_jaw(primitive)

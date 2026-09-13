@@ -11,7 +11,7 @@ import wrs.robots.manipulators.denso.cvr038.cvr038 as wrmdc
 if __name__ == '__main__':
     base = wvw.World(cam_pos=(1.6, 1.2, 1.1), cam_lookat_pos=(0.0, 0.0, 0.3))
     scene = base.scene
-    wssop.frame().add_to_scene(scene)
+    wssop.coord_frame().add_to_scene(scene)
 
     robot = wrmdc.CVR038()
     robot.add_to_scene(scene)
@@ -24,13 +24,13 @@ if __name__ == '__main__':
     jviz.add_to_scene(scene)
 
     flange_tf = robot.tcp('flange').tf
-    wssop.frame(pos=flange_tf[:3, 3], rotmat=flange_tf[:3, :3],
+    wssop.coord_frame(pos=flange_tf[:3, 3], rotmat=flange_tf[:3, :3],
                 color_mat=wuc.CoordColor.MYC).add_to_scene(scene)
     base.run()
 
     tgt_pos = (0.25, 0.15, 0.25)
     tgt_rotmat = (wum.rotmat_from_axangle(wuc.StandardAxis.Z, np.pi / 6.0) @
                   wum.rotmat_from_axangle(wuc.StandardAxis.Y, np.pi))
-    wssop.frame(pos=tgt_pos, rotmat=tgt_rotmat).add_to_scene(scene)
+    wssop.coord_frame(pos=tgt_pos, rotmat=tgt_rotmat).add_to_scene(scene)
 
     base.run()

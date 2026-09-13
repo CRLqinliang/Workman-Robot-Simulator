@@ -145,7 +145,7 @@ def main():
     import wrs.viewer.world as wvw
     base = wvw.World(cam_pos=(1.9, -0.6, 1.4), cam_lookat_pos=(0.25, 0.3, 1.05))
     builtins.base = base
-    wssop.frame().add_to_scene(base.scene)
+    wssop.coord_frame().add_to_scene(base.scene)
     robot.alpha = 0.2
     robot.left_hand.alpha = 0.2
     robot.right_hand.alpha = 0.2

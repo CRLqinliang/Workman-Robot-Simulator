@@ -4,7 +4,7 @@ from wrs import wum, wvw, wuc, wssop, wcm, wmppc, wmpr, khi_rs007l
 
 base = wvw.World(cam_pos=(-2, 2, 2), cam_lookat_pos=(0, 0, 0.5), toggle_auto_cam_orbit=False)
 builtins.base = base
-oframe = wssop.frame()
+oframe = wssop.coord_frame()
 oframe.add_to_scene(base.scene)
 robot = khi_rs007l.RS007L()
 robot.is_floating=True

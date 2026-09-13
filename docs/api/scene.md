@@ -77,9 +77,9 @@ _Mesh geometry operations on raw (vertices, faces) arrays: surface_
 - `linsegs(segs, radius=0.001, srgbs=None, alpha=1.0)` — segs: (N,2,3), srgb: None | scalar | (3,) | (N,3)
 - `arrow(spos=np.zeros(3), epos=np.ones(3) * 0.01, shaft_radius=wuc.ArrowSize.SHAFT_RADIUS, head_radius=wuc.ArrowSize.HEAD_RADIUS, head_length=wuc.ArrowSize.HEAD_LENGTH, n_segs=8, rgb=wuc.BasicColor.DEFAULT, alpha=1.0, **kwargs)`
 - `dashed_arrow(spos=np.zeros(3), epos=np.ones(3) * 0.01, shaft_radius=wuc.ArrowSize.SHAFT_RADIUS, head_radius=wuc.ArrowSize.HEAD_RADIUS, head_length=wuc.ArrowSize.HEAD_LENGTH, len_solid=None, len_interval=None, n_segs=8, rgb=wuc.BasicColor.DEFAULT, alpha=1.0, **kwargs)`
-- `frame_from_tf(tf, length_scale=1.0, radius_scale=1.0, n_segs=8, color_mat=wuc.CoordColor.RGB, alpha=1.0, **kwargs)` — Draw a coordinate frame at the pose given by a 4x4 transform.
-- `frame(pos=np.zeros(3), rotmat=np.eye(3), length_scale=1.0, radius_scale=1.0, n_segs=8, color_mat=wuc.CoordColor.RGB, alpha=1.0, **kwargs)`
-- `dashed_frame(pos=np.zeros(3), rotmat=np.eye(3), length_scale=1.0, radius_scale=1.0, len_solid=None, len_interval=None, n_segs=8, color_mat=wuc.CoordColor.RGB, alpha=1.0, **kwargs)`
+- `coord_frame_from_tf(tf, length_scale=1.0, radius_scale=1.0, n_segs=8, color_mat=wuc.CoordColor.RGB, alpha=1.0, **kwargs)` — Draw a coordinate frame at the pose given by a 4x4 transform.
+- `coord_frame(pos=np.zeros(3), rotmat=np.eye(3), length_scale=1.0, radius_scale=1.0, n_segs=8, color_mat=wuc.CoordColor.RGB, alpha=1.0, **kwargs)`
+- `dashed_coord_frame(pos=np.zeros(3), rotmat=np.eye(3), length_scale=1.0, radius_scale=1.0, len_solid=None, len_interval=None, n_segs=8, color_mat=wuc.CoordColor.RGB, alpha=1.0, **kwargs)`
 - `plane(pos=(0, 0, 0), normal=wuc.StandardAxis.Z, size=(100.0, 100.0), thickness=0.001, rgb=wuc.BasicColor.GRAY, alpha=1.0)`
 - `point_cloud(vs, vrgbs, alpha=1.0)` — Build a point-cloud SceneObject from per-vertex positions and colors.
 - `frustrum(base_center=(0, 0, 0), top_center=(0, 0, 0.05), bottom_length=0.05, top_length=0.03, rgb=wuc.BasicColor.DEFAULT, alpha=1.0, **kwargs)`

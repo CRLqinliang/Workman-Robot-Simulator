@@ -3,7 +3,7 @@ import numpy as np
 import wrs.physics.mj_env as wpme
 from wrs import wum, wvw, wssop, wuc, wsso, khi_rs007l
 
-oframe = wssop.frame()
+oframe = wssop.coord_frame()
 bunny = wsso.SceneObject.from_file(
     "bunny.stl", collision_type=wuc.CollisionType.MESH,
     is_floating=True)

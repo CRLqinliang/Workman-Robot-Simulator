@@ -4,13 +4,13 @@ from wrs import wum, wuc, wvw, wssop, khi_rs007l, or_2fg7
 
 base = wvw.World(cam_pos=(2, 1, 1.5), cam_lookat_pos=(0, 0, .75),
                  toggle_auto_cam_orbit=False)
-wssop.frame().add_to_scene(base.scene)
+wssop.coord_frame().add_to_scene(base.scene)
 robot = khi_rs007l.RS007L(pos=(.5, 0, 0))
 robot.add_to_scene(base.scene)
 
 tgt_pos = np.array([0, .5, .3])
 tgt_rotmat = wum.rotmat_from_euler(wum.pi, 0, 0)
-wssop.frame(rotmat=tgt_rotmat, pos=tgt_pos).add_to_scene(base.scene)
+wssop.coord_frame(rotmat=tgt_rotmat, pos=tgt_pos).add_to_scene(base.scene)
 qs_list = robot.ik(tgt_pos, tgt_rotmat)
 robot_ik = robot.clone()
 robot_ik.rgb = wuc.BasicColor.LIME
@@ -18,7 +18,7 @@ robot_ik.fk(qs=qs_list[0])
 robot_ik.add_to_scene(base.scene)
 wd_tcp_rotmat = robot_ik.tcp('flange').tf[:3, :3]
 wd_tcp_pos = robot_ik.tcp('flange').tf[:3, 3]
-wssop.frame(rotmat=wd_tcp_rotmat, pos=wd_tcp_pos,
+wssop.coord_frame(rotmat=wd_tcp_rotmat, pos=wd_tcp_pos,
             color_mat=wuc.CoordColor.MYC).add_to_scene(base.scene)
 
 robot2 = robot.clone()

@@ -3,5 +3,5 @@ if __name__ == '__main__':
 
     base = wvw.World(cam_pos=(.3, .3, .3), toggle_auto_cam_orbit=True)
     wsso.SceneObject.from_file("link6.stl").add_to_scene(base.scene)
-    wssop.frame(length_scale=.3, radius_scale=.3).add_to_scene(base.scene)
+    wssop.coord_frame(length_scale=.3, radius_scale=.3).add_to_scene(base.scene)
     base.run()

@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
     base = wvw.World(cam_pos=(0.9, 0.6, 0.6), cam_lookat_pos=(0.0, 0.0, 0.15))
     scene = base.scene
-    wssop.frame().add_to_scene(scene)
+    wssop.coord_frame().add_to_scene(scene)
 
     link_sobj = wsso.SceneObject.from_file(
         path=mesh_path,

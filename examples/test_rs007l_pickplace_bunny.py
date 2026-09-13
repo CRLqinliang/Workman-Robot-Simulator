@@ -97,13 +97,13 @@ import wrs.viewer.world as wvw                                  # noqa: E402
 import wrs.viewer.key as key                                 # noqa: E402
 
 base = wvw.World(cam_pos=(2.2, 2.2, 1.7), cam_lookat_pos=(0.1, 0.1, 0.6))
-wssop.frame().add_to_scene(base.scene)
+wssop.coord_frame().add_to_scene(base.scene)
 robot.add_to_scene(base.scene)
 ground.add_to_scene(base.scene)
 wall.rgb = (0.7, 0.4, 0.4)
 wall.add_to_scene(base.scene)
-wssop.frame(pos=tf_pick[:3, 3], rotmat=tf_pick[:3, :3]).add_to_scene(base.scene)
-wssop.frame(pos=tf_place[:3, 3], rotmat=tf_place[:3, :3]).add_to_scene(base.scene)
+wssop.coord_frame(pos=tf_pick[:3, 3], rotmat=tf_pick[:3, :3]).add_to_scene(base.scene)
+wssop.coord_frame(pos=tf_place[:3, 3], rotmat=tf_place[:3, :3]).add_to_scene(base.scene)
 bunny.add_to_scene(base.scene)
 
 state = {"i": 0, "playing": False}

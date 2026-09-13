@@ -101,7 +101,7 @@ def main():
         return
 
     base = wvw.World(cam_pos=(2.2, 1.4, 1.6), cam_lookat_pos=(0.0, 0.0, 0.9))
-    wssop.frame().add_to_scene(base.scene)
+    wssop.coord_frame().add_to_scene(base.scene)
     wssop.plane(pos=(0, 0, 0.0)).add_to_scene(base.scene)
     robot.add_to_scene(base.scene)
     robot.fk(qs=qs[0])

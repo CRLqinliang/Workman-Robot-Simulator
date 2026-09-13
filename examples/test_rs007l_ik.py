@@ -5,7 +5,7 @@ from wrs import wum, wvw, wssop, khi_rs007l
 
 base = wvw.World(cam_pos=(1.5, 1, 1.5), cam_lookat_pos=(0, 0, .5),
                  toggle_auto_cam_orbit=True)
-oframe = wssop.frame().add_to_scene(base.scene)
+oframe = wssop.coord_frame().add_to_scene(base.scene)
 robot = khi_rs007l.RS007L()
 robot.add_to_scene(base.scene)
 builtins.robot = robot  # for debug access
@@ -20,7 +20,7 @@ for x in xs:
     for y in ys:
         for z in zs:
             tgt_pos = (x, y, z)
-            wssop.frame(pos=tgt_pos, rotmat=tgt_rotmat).add_to_scene(base.scene)
+            wssop.coord_frame(pos=tgt_pos, rotmat=tgt_rotmat).add_to_scene(base.scene)
             tic = time.perf_counter_ns()
             qs_list = robot.ik(tgt_pos, tgt_rotmat)
             toc = time.perf_counter_ns()

@@ -11,7 +11,7 @@ bunny = wsso.SceneObject.from_file(
     "bunny.stl", collision_type=wuc.CollisionType.MESH)
 bunny.alpha = 0.3
 bunny.add_to_scene(base.scene)
-oframe = wssop.frame(length_scale=0.25)
+oframe = wssop.coord_frame(length_scale=0.25)
 oframe.add_to_scene(base.scene)
 
 plane_ground = wssop.plane()

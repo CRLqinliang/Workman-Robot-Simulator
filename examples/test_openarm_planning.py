@@ -5,7 +5,7 @@ import wrs.robots.manipulators.openarm.openarm as wrmoo
 
 base = wvw.World(cam_pos=(1.2, .575, 1.2), cam_lookat_pos=(0, 0, .4),
                  toggle_auto_cam_orbit=True)
-oframe = wssop.frame().add_to_scene(base.scene)
+oframe = wssop.coord_frame().add_to_scene(base.scene)
 
 robot = wrmoo.OpenArm()
 robot.add_to_scene(base.scene)
@@ -36,11 +36,11 @@ for i in range(num_points):
     y = tgt_pos[1] + radius * wum.cos(angle)
     z = tgt_pos[2] + radius * wum.sin(angle)
     tgt_pos_list.append((x, y, z))
-    wssop.frame(pos=(x, y, z), rotmat=tgt_rotmat).add_to_scene(base.scene)
+    wssop.coord_frame(pos=(x, y, z), rotmat=tgt_rotmat).add_to_scene(base.scene)
 
 qs_list = robot.lft_arm.ik(tgt_pos, tgt_rotmat, tcp=lft_gripper.tcp('grasp_center'))
 tcp_tf = robot.lft_arm.tcp('flange').tf
-tcp_frame = wssop.frame(rotmat=tcp_tf[:3, :3], pos=tcp_tf[:3, 3],
+tcp_frame = wssop.coord_frame(rotmat=tcp_tf[:3, :3], pos=tcp_tf[:3, 3],
                         color_mat=wuc.CoordColor.MYC)
 tcp_frame.add_to_scene(base.scene)
 for qs in qs_list:

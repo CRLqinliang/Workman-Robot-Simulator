@@ -171,7 +171,7 @@ if __name__ == "__main__":
     tgt_rotmat = wum.rotmat_from_axangle(
         wuc.StandardAxis.Z, 0
     ) @ wum.rotmat_from_axangle(wuc.StandardAxis.Y, wum.pi)
-    wssop.frame(pos=tgt_pos, rotmat=tgt_rotmat).add_to_scene(base.scene)
+    wssop.coord_frame(pos=tgt_pos, rotmat=tgt_rotmat).add_to_scene(base.scene)
 
     # all_qs = robot.ik(tgt_pos, tgt_rotmat, max_solutions=8)
     # for qs in all_qs:

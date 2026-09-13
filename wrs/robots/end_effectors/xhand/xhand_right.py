@@ -166,7 +166,7 @@ if __name__ == '__main__':
     base = wvw.World(cam_pos=(0.6, -0.4, 0.5),
                      cam_lookat_pos=(0.0, -0.5 * dy * (len(PREVIEW) - 1), 0.08))
     builtins.base = base
-    wssop.frame().add_to_scene(base.scene)
+    wssop.coord_frame().add_to_scene(base.scene)
 
     hands = []
     for i, (name, action, tcp) in enumerate(PREVIEW):
@@ -174,7 +174,7 @@ if __name__ == '__main__':
         action(hand)
         hand.add_to_scene(base.scene)
         # small frame at the hand base to mark each one
-        wssop.frame(pos=hand.runtime_root_lnk.tf[:3, 3],
+        wssop.coord_frame(pos=hand.runtime_root_lnk.tf[:3, 3],
                     rotmat=hand.runtime_root_lnk.tf[:3, :3]).add_to_scene(base.scene)
         if tcp is not None:
             hand.toggle_tcp(tcp, length_scale=0.15, radius_scale=0.25)

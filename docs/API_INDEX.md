@@ -710,9 +710,9 @@ _Mesh geometry operations on raw (vertices, faces) arrays: surface_
 - `linsegs(segs, radius=0.001, srgbs=None, alpha=1.0)` — segs: (N,2,3), srgb: None | scalar | (3,) | (N,3)
 - `arrow(spos=np.zeros(3), epos=np.ones(3) * 0.01, shaft_radius=wuc.ArrowSize.SHAFT_RADIUS, head_radius=wuc.ArrowSize.HEAD_RADIUS, head_length=wuc.ArrowSize.HEAD_LENGTH, n_segs=8, rgb=wuc.BasicColor.DEFAULT, alpha=1.0, **kwargs)`
 - `dashed_arrow(spos=np.zeros(3), epos=np.ones(3) * 0.01, shaft_radius=wuc.ArrowSize.SHAFT_RADIUS, head_radius=wuc.ArrowSize.HEAD_RADIUS, head_length=wuc.ArrowSize.HEAD_LENGTH, len_solid=None, len_interval=None, n_segs=8, rgb=wuc.BasicColor.DEFAULT, alpha=1.0, **kwargs)`
-- `frame_from_tf(tf, length_scale=1.0, radius_scale=1.0, n_segs=8, color_mat=wuc.CoordColor.RGB, alpha=1.0, **kwargs)` — Draw a coordinate frame at the pose given by a 4x4 transform.
-- `frame(pos=np.zeros(3), rotmat=np.eye(3), length_scale=1.0, radius_scale=1.0, n_segs=8, color_mat=wuc.CoordColor.RGB, alpha=1.0, **kwargs)`
-- `dashed_frame(pos=np.zeros(3), rotmat=np.eye(3), length_scale=1.0, radius_scale=1.0, len_solid=None, len_interval=None, n_segs=8, color_mat=wuc.CoordColor.RGB, alpha=1.0, **kwargs)`
+- `coord_frame_from_tf(tf, length_scale=1.0, radius_scale=1.0, n_segs=8, color_mat=wuc.CoordColor.RGB, alpha=1.0, **kwargs)` — Draw a coordinate frame at the pose given by a 4x4 transform.
+- `coord_frame(pos=np.zeros(3), rotmat=np.eye(3), length_scale=1.0, radius_scale=1.0, n_segs=8, color_mat=wuc.CoordColor.RGB, alpha=1.0, **kwargs)`
+- `dashed_coord_frame(pos=np.zeros(3), rotmat=np.eye(3), length_scale=1.0, radius_scale=1.0, len_solid=None, len_interval=None, n_segs=8, color_mat=wuc.CoordColor.RGB, alpha=1.0, **kwargs)`
 - `plane(pos=(0, 0, 0), normal=wuc.StandardAxis.Z, size=(100.0, 100.0), thickness=0.001, rgb=wuc.BasicColor.GRAY, alpha=1.0)`
 - `point_cloud(vs, vrgbs, alpha=1.0)` — Build a point-cloud SceneObject from per-vertex positions and colors.
 - `frustrum(base_center=(0, 0, 0), top_center=(0, 0, 0.05), bottom_length=0.05, top_length=0.03, rgb=wuc.BasicColor.DEFAULT, alpha=1.0, **kwargs)`
@@ -866,21 +866,28 @@ _Key symbols: ASCII for printable keys, X11 keysyms for the rest._
 ## `wrs.viewer.protocol`
 _Scene -> wire._
 
-- `serialize(model, model_id: str)`
+- `pack(header: Dict[str, Any], arrays: List[bytes])` — One binary frame from a header and the blobs its offsets refer to.
+- `unpack(frame: bytes)` — Inverse of :func:`pack`: the header and a view on the blob.
 - `iter_scene_models(scene)` — Walk the scene as (model_id, model, owner) -- no serialization.
-- `collect_models(scene)`
-- `collect_transforms(scene)`
+- `model_entry(model, model_id: str)` — A drawable with no arrays of its own: which geometry, and what colour.
+- `geometry_entry(model)` — That geometry's arrays, as (metadata, {field: raw bytes}).
+- `describe(pairs, known_geoms)` — (model_id, model) pairs -> the entries a message carries.
+- `scene_message(msg_type, models, geometries, camera=None, remove=None, replay=False)` — ``scene_init`` or ``scene_delta``: any geometry the far end is missing,
+- `split_geometries(header, blob)` — Frame -> the (metadata, {field: bytes}) pairs geometry_entry makes.
+- `transform_arrays(snapshot)` — A snapshot as (ids, (N, 16) float32) -- one column-major matrix a row.
+- `transform_message(ids, matrices)` — Poses for the ids given: ids in the header, matrices in one contiguous
+- `split_transforms(header, blob)` — A pose frame -> {id: raw 64 bytes}, for a cache that has to survive
 
 ## `wrs.viewer.server`
 _The hub: one long-lived process, one port, serving the page and relaying_
 
-- `serve(host='127.0.0.1', port=DEFAULT_PORT)`
+- `serve(host='127.0.0.1', port=DEFAULT_PORT, idle_timeout=IDLE_TIMEOUT, auto_open=True)`
 - `main()`
 - **class `Hub`** — Fan-out from one publisher to any number of viewers.
-  - methods: `on_publish`, `on_view`
+  - methods: `watch_idle`, `on_publish`, `on_view`
 
 ## `wrs.viewer.world`
 _The world a script builds its scene in, drawn by the browser page._
 
 - **class `World`** — Same surface as the old native World, minus the window.
-  - methods: `set_scene`, `set_caption`, `auto_cam_orbit`, `schedule_interval`, `schedule_once`, `schedule_interval_after`, `stop`, `stop_after`, `event`, `dispatch`, `is_key_pressed`, `close`, `run`, `post_event`
+  - methods: `set_scene`, `set_caption`, `schedule_interval`, `schedule_once`, `stop`, `stop_after`, `event`, `dispatch`, `is_key_pressed`, `is_key_pressed_edge`, `close`, `run`

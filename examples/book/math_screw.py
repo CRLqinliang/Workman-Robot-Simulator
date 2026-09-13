@@ -7,7 +7,7 @@ base = wvw.World(cam_pos=(.5, .5, .5), cam_lookat_pos=(0, 0, 0),
                  toggle_auto_cam_orbit=False)
 
 # world frame
-wssop.frame(pos=np.zeros(3), rotmat=np.eye(3)).add_to_scene(base.scene)
+wssop.coord_frame(pos=np.zeros(3), rotmat=np.eye(3)).add_to_scene(base.scene)
 
 # target motion
 p = np.array([0.1, 0.3, 0.4])
@@ -18,11 +18,11 @@ wssop.arrow(spos=np.zeros(3), epos=p,
             rgb=wuc.BasicColor.BLACK).add_to_scene(base.scene)
 
 # dashed semi-transparent frame: after translation only
-wssop.dashed_frame(pos=p, rotmat=np.eye(3),
+wssop.dashed_coord_frame(pos=p, rotmat=np.eye(3),
                    alpha=wuc.ALPHA.LIGHT_SEMI).add_to_scene(base.scene)
 
 # dashed opaque frame: after translation + rotation
-wssop.dashed_frame(pos=p, rotmat=R,
+wssop.dashed_coord_frame(pos=p, rotmat=R,
                    alpha=wuc.ALPHA.SOLID).add_to_scene(base.scene)
 
 # screw decomposition: (R, p) <=> rotate theta about line (s_axis through q_s),
@@ -81,7 +81,7 @@ for k in range(n_steps + 1):
     tau = k / n_steps
     R_tau = wum.rotmat_from_axangle(a_s, tau * theta)
     p_tau = (I3 - R_tau) @ q_s + tau * d_s * a_s
-    wssop.frame(pos=p_tau, rotmat=R_tau,
+    wssop.coord_frame(pos=p_tau, rotmat=R_tau,
                 length_scale=0.5, alpha=0.5).add_to_scene(base.scene)
     center = q_s + tau * d_s * a_s
     segs = dashed_circle_segs(center, a_s, radius_circle)

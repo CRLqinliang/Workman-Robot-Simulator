@@ -7,7 +7,7 @@ import wrs.robots.manipulators.universal_robots.ur3.ur3 as wrmuu3
 
 base = wvw.World(cam_pos=(1.5, 1, 1.5), cam_lookat_pos=(0, 0, .5),
                  toggle_auto_cam_orbit=True)
-oframe = wssop.frame().add_to_scene(base.scene)
+oframe = wssop.coord_frame().add_to_scene(base.scene)
 robot = wrmuu3.UR3(rotmat=wum.rotmat_from_euler(0, 0, -wum.pi / 2))
 robot.add_to_scene(base.scene)
 builtins.robot = robot  # for debug access
@@ -22,7 +22,7 @@ for x in xs:
     for y in ys:
         for z in zs:
             tgt_pos = (x, y, z)
-            wssop.frame(pos=tgt_pos, rotmat=tgt_rotmat).add_to_scene(base.scene)
+            wssop.coord_frame(pos=tgt_pos, rotmat=tgt_rotmat).add_to_scene(base.scene)
             tic = time.perf_counter_ns()
             qs_list = robot.ik(tgt_pos, tgt_rotmat)
             toc = time.perf_counter_ns()

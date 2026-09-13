@@ -100,7 +100,7 @@ if __name__ == "__main__":
     base = wvw.World(cam_pos=[0.4, 0.2, 0.3], cam_lookat_pos=[0, 0, 0.06])
     gripper = FR3Gripper()
     gripper.add_to_scene(base.scene)
-    wssop.frame().add_to_scene(base.scene)
+    wssop.coord_frame().add_to_scene(base.scene)
     builtins.base = base
     builtins.gripper = gripper
     base.run()

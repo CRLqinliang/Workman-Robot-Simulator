@@ -68,7 +68,7 @@ def main(primitive='pinch'):
 
     base = wvw.World(cam_pos=(0.35, 0.0, 0.18), cam_lookat_pos=(0.0, 0.0, 0.0))
     builtins.base = base
-    wssop.frame(length_scale=0.5).add_to_scene(base.scene)
+    wssop.coord_frame(length_scale=0.5).add_to_scene(base.scene)
     cyl.add_to_scene(base.scene)
 
     # Two independent jaw views, shown at the same time: GREEN at the grasp

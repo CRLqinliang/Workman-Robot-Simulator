@@ -171,7 +171,7 @@ if __name__ == "__main__":
     for jidx in robot.chain('main').jnt_ids_in_structure:
         parent_lidx = compiled.plidx_of_jidx[jidx]
         parent_lnk = robot.runtime_lnks[parent_lidx]
-        frame = wssop.frame(length_scale=0.35, radius_scale=0.45)
+        frame = wssop.coord_frame(length_scale=0.35, radius_scale=0.45)
         robot.mount(frame, parent_lnk, compiled.jtf0_by_idx[jidx], update=True)
         joint_frames.append(frame)
 

@@ -15,7 +15,7 @@ if __name__ == '__main__':
     base = wvw.World(cam_pos=(1.9, 1.3, 1.3), cam_lookat_pos=(0.2, 0.0, 0.35))
     builtins.base = base
     scene = base.scene
-    wssop.frame().add_to_scene(scene)
+    wssop.coord_frame().add_to_scene(scene)
 
     # tool z-axis points straight down (approach / stand orientation)
     DOWN = wum.rotmat_from_euler(wum.pi, 0.0, 0.0)
@@ -42,7 +42,7 @@ if __name__ == '__main__':
     screwdriver.add_to_scene(scene)
 
     for p in (FG7_STAND, SD_STAND):
-        wssop.frame(pos=p, rotmat=DOWN, color_mat=wuc.CoordColor.DYO).add_to_scene(scene)
+        wssop.coord_frame(pos=p, rotmat=DOWN, color_mat=wuc.CoordColor.DYO).add_to_scene(scene)
 
     # ---- bunny + place target ----
     BUNNY = np.array([0.45, 0.20, 0.0], dtype=np.float32)

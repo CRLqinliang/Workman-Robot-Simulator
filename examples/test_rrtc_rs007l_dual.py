@@ -6,7 +6,7 @@ from wrs import wuc, wum, wvw, wcm, wssop, wmppc, wmpr, khi_rs007l
 base = wvw.World(cam_pos=(2.2, .7, .7), cam_lookat_pos=(0, 0, .6),
                  toggle_auto_cam_orbit=False)
 # world origin
-oframe = wssop.frame().add_to_scene(base.scene)
+oframe = wssop.coord_frame().add_to_scene(base.scene)
 base_pos1 = np.array([0, 0.5, 0])
 base_rotmat = wum.rotmat_from_euler(0, 0, -np.pi / 2)
 # robot 1 (left robot)

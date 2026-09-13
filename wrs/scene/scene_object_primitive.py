@@ -355,7 +355,7 @@ def dashed_arrow(
     return o
 
 
-def frame_from_tf(
+def coord_frame_from_tf(
     tf,
     length_scale=1.0,
     radius_scale=1.0,
@@ -365,7 +365,7 @@ def frame_from_tf(
     **kwargs,
 ):
     """Draw a coordinate frame at the pose given by a 4x4 transform."""
-    return frame(
+    return coord_frame(
         pos=tf[:3, 3],
         rotmat=tf[:3, :3],
         length_scale=length_scale,
@@ -377,7 +377,7 @@ def frame_from_tf(
     )
 
 
-def frame(
+def coord_frame(
     pos=np.zeros(3),
     rotmat=np.eye(3),
     length_scale=1.0,
@@ -438,7 +438,7 @@ def frame(
     return o
 
 
-def dashed_frame(
+def dashed_coord_frame(
     pos=np.zeros(3),
     rotmat=np.eye(3),
     length_scale=1.0,

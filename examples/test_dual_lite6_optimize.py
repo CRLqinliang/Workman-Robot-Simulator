@@ -209,7 +209,7 @@ def visualize(best):
         print("[visualize] no reachable table cells in best config — "
               "widen search ranges or check task/table placement.")
 
-    wssop.frame().add_to_scene(base.scene)
+    wssop.coord_frame().add_to_scene(base.scene)
     base.run()
 
 

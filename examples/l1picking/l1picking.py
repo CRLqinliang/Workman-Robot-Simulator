@@ -223,7 +223,7 @@ def main():
 
     base = wvw.World(cam_pos=(1.6, 1.0, 1.7), cam_lookat_pos=(0.35, 0.1, 0.95))
     builtins.base = base
-    wssop.frame().add_to_scene(base.scene)
+    wssop.coord_frame().add_to_scene(base.scene)
     for e in (robot, *table, cyl, ground):
         e.add_to_scene(base.scene)
 

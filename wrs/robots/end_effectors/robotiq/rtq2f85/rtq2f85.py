@@ -203,7 +203,7 @@ if __name__ == '__main__':
 
     base = wvw.World(cam_pos=(0.45, -0.45, 0.28), cam_lookat_pos=(0.10, 0.0, 0.08))
     builtins.base = base
-    wssop.frame().add_to_scene(base.scene)
+    wssop.coord_frame().add_to_scene(base.scene)
 
     jaw_widths = [0.0, 0.02, 0.04, 0.06, 0.085]
     template = Rtq2F85()
@@ -217,7 +217,7 @@ if __name__ == '__main__':
         grippers.append(gripper)
         phases.append(i * 0.5)
         _tf = gripper.tcp('grasp_center').tf
-        wssop.frame(pos=_tf[:3, 3],
+        wssop.coord_frame(pos=_tf[:3, 3],
                     rotmat=_tf[:3, :3],
                     color_mat=wuc.CoordColor.MYC).add_to_scene(base.scene)
         print(f'gripper[{i}] jaw_width={jaw_width:.3f} m')

@@ -46,14 +46,14 @@ def main():
 
     base = wvw.World(cam_pos=(1.6, -0.5, 1.4), cam_lookat_pos=(0.2, 0.1, 1.0))
     builtins.base = base
-    wssop.frame().add_to_scene(base.scene)                 # world frame
+    wssop.coord_frame().add_to_scene(base.scene)                 # world frame
     wssop.plane(pos=(0, 0, 0.0)).add_to_scene(base.scene)
     robot.add_to_scene(base.scene)
 
     tgt = {"pos": DEFAULT_POS.copy(), "rot": DEFAULT_ROT.copy(), "sol": 0}
-    tgt_frame = wssop.frame(pos=tgt["pos"], rotmat=tgt["rot"], length_scale=0.5)
+    tgt_frame = wssop.coord_frame(pos=tgt["pos"], rotmat=tgt["rot"], length_scale=0.5)
     tgt_frame.add_to_scene(base.scene)
-    tcp_frame = wssop.frame(length_scale=0.5, color_mat=wuc.CoordColor.MYC)
+    tcp_frame = wssop.coord_frame(length_scale=0.5, color_mat=wuc.CoordColor.MYC)
     tcp_frame.add_to_scene(base.scene)
 
     def solve_and_show():

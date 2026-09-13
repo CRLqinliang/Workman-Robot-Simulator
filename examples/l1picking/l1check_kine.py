@@ -43,7 +43,7 @@ def closest_points(o1, d1, o2, d2):
 def main():
     base = wvw.World(cam_pos=(0.9, 0.6, 1.4), cam_lookat_pos=(0.1, 0.15, 0.9))
     builtins.base = base
-    wssop.frame().add_to_scene(base.scene)
+    wssop.coord_frame().add_to_scene(base.scene)
 
     robot = l1mod.L1O6()
     robot.fk(qs=np.zeros(robot.qs.shape, dtype=np.float32))   # zero config
@@ -68,7 +68,7 @@ def main():
         o_w.append(o.astype(np.float32))
         a_w.append(a.astype(np.float32))
         # coordinate frame at each joint origin
-        wssop.frame(pos=o).add_to_scene(base.scene)
+        wssop.coord_frame(pos=o).add_to_scene(base.scene)
 
     # draw every axis as an extended line; highlight axis1 (red) and axis2 (cyan)
     L = 0.25

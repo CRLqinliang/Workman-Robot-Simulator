@@ -200,14 +200,14 @@ if __name__ == "__main__":
     base = wvw.World(cam_pos=(2, 1, 1), cam_lookat_pos=(0, 0, 0.5))
     builtins.base = base
     scene = base.scene
-    oframe = wssop.frame()
+    oframe = wssop.coord_frame()
     oframe.add_to_scene(scene)
     robot = UR3()
     robot.add_to_scene(scene)
     base.run()
     # robot.alpha=0.3
     builtins.robot = robot
-    wssop.frame(
+    wssop.coord_frame(
         pos=robot.tcp('flange').tf[:3, 3],
         rotmat=robot.tcp('flange').tf[:3, :3],
         color_mat=wuc.CoordColor.MYC,
@@ -217,7 +217,7 @@ if __name__ == "__main__":
     tgt_rotmat = wum.rotmat_from_axangle(
         wuc.StandardAxis.Z, np.pi / 6.0
     ) @ wum.rotmat_from_axangle(wuc.StandardAxis.Y, np.pi)
-    wssop.frame(pos=tgt_pos, rotmat=tgt_rotmat).add_to_scene(scene)
+    wssop.coord_frame(pos=tgt_pos, rotmat=tgt_rotmat).add_to_scene(scene)
 
     all_qs = robot.ik(tgt_pos, tgt_rotmat, max_solutions=8)
     for qs in all_qs:

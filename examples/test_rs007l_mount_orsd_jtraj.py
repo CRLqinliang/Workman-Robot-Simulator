@@ -15,7 +15,7 @@ if __name__ == '__main__':
     base = wvw.World(cam_pos=(2.0, 0.8, 1.6), cam_lookat_pos=(0.0, 0.0, 0.7))
     builtins.base = base
     scene = base.scene
-    wssop.frame().add_to_scene(scene)
+    wssop.coord_frame().add_to_scene(scene)
 
     robot = wrmkr7.RS007L()
     robot.add_to_scene(scene)
@@ -48,8 +48,8 @@ if __name__ == '__main__':
     goal_pos = start_pos + np.array([0.5, 0.5, 0.2], dtype=np.float32)
     goal_rotmat = start_rotmat.copy()
 
-    wssop.frame(pos=start_pos, rotmat=start_rotmat, color_mat=wuc.CoordColor.DYO).add_to_scene(scene)
-    wssop.frame(pos=goal_pos, rotmat=goal_rotmat, color_mat=wuc.CoordColor.MYC).add_to_scene(scene)
+    wssop.coord_frame(pos=start_pos, rotmat=start_rotmat, color_mat=wuc.CoordColor.DYO).add_to_scene(scene)
+    wssop.coord_frame(pos=goal_pos, rotmat=goal_rotmat, color_mat=wuc.CoordColor.MYC).add_to_scene(scene)
 
     q_seq, pose_seq = wmic.linear_to_jpath(
         robot=robot,
@@ -66,7 +66,7 @@ if __name__ == '__main__':
         print('linear_to_jpath failed (IK failed on at least one sample).')
         pos_seq, rotmat_seq = pose_seq
         for pos, rotmat in zip(pos_seq, rotmat_seq):
-            wssop.frame(
+            wssop.coord_frame(
                 pos=pos,
                 rotmat=rotmat,
                 color_mat=wuc.CoordColor.DYO,
@@ -108,7 +108,7 @@ if __name__ == '__main__':
 
         pos_seq, rotmat_seq = pose_seq
         for pos, rotmat in zip(pos_seq, rotmat_seq):
-            wssop.frame(
+            wssop.coord_frame(
                 pos=pos,
                 rotmat=rotmat,
                 color_mat=wuc.CoordColor.DYO,

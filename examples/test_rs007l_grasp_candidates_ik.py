@@ -21,7 +21,7 @@ if __name__ == "__main__":
     base = wvw.World(cam_pos=(2, 2, 1.5), cam_lookat_pos=(0, 0, 0.75))
     builtins.base = base
     scene = base.scene
-    wssop.frame().add_to_scene(scene)
+    wssop.coord_frame().add_to_scene(scene)
 
     robot = khi_rs007l.RS007L()
     robot.add_to_scene(scene)
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     gripper.add_to_scene(scene)
     robot.mount(gripper, robot.runtime_lnks[-1], update=True)
 
-    wssop.frame(pos =robot.tcp('flange').tf[:3, 3],
+    wssop.coord_frame(pos =robot.tcp('flange').tf[:3, 3],
                 rotmat=robot.tcp('flange').tf[:3, :3],
                 color_mat=wuc.CoordColor.MYC).add_to_scene(scene)
 
@@ -47,7 +47,7 @@ if __name__ == "__main__":
         _s = robot.ik(tgt_pos, tgt_rot, tcp=gripper.tcp('grasp_center'), max_solutions=1)
         qs = _s[0] if _s else None
         if qs is None:
-            wssop.frame(
+            wssop.coord_frame(
                 pos=tgt_pos,
                 rotmat=tgt_rot,
                 color_mat=wuc.CoordColor.DYO,
@@ -56,7 +56,7 @@ if __name__ == "__main__":
             continue
         n_ik += 1
 
-        wssop.frame(
+        wssop.coord_frame(
             pos=tgt_pos,
             rotmat=tgt_rot,
             color_mat=wuc.CoordColor.MYC,

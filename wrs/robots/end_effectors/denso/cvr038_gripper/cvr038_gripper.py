@@ -99,7 +99,7 @@ if __name__ == '__main__':
     base = wvw.World(cam_pos=[0.3, 0.25, 0.2], cam_lookat_pos=[0, 0, 0.05])
     gripper = CVR038Gripper()
     gripper.add_to_scene(base.scene)
-    wssop.frame().add_to_scene(base.scene)
+    wssop.coord_frame().add_to_scene(base.scene)
     builtins.base = base
     builtins.gripper = gripper
     base.run()

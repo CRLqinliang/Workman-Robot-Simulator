@@ -14,7 +14,7 @@ if __name__ == "__main__":
     base = wvw.World(cam_pos=(1.6, 1.0, 1.4), cam_lookat_pos=(0.0, 0.0, 0.45))
     builtins.base = base
     scene = base.scene
-    wssop.frame().add_to_scene(scene)
+    wssop.coord_frame().add_to_scene(scene)
 
     robot = wrmuu3.UR3()
     robot.add_to_scene(scene)
@@ -37,14 +37,14 @@ if __name__ == "__main__":
         wum.rotmat_from_axangle(wuc.StandardAxis.Z, np.pi / 6.0)
         @ wum.rotmat_from_axangle(wuc.StandardAxis.Y, np.pi)
     )
-    wssop.frame(pos=tgt_pos, rotmat=tgt_rotmat, color_mat=wuc.CoordColor.DYO).add_to_scene(scene)
+    wssop.coord_frame(pos=tgt_pos, rotmat=tgt_rotmat, color_mat=wuc.CoordColor.DYO).add_to_scene(scene)
 
     _s = robot.ik(tgt_pos, tgt_rotmat, tcp=gripper.tcp('grasp_center'), max_solutions=1)
     qs = _s[0] if _s else None
     print("ik:", qs)
     if qs is not None:
         robot.fk(qs=qs)
-        wssop.frame(
+        wssop.coord_frame(
             pos=robot.tcp('flange').tf[:3, 3],
             rotmat=robot.tcp('flange').tf[:3, :3],
             color_mat=wuc.CoordColor.MYC,

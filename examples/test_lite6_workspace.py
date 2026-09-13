@@ -117,7 +117,7 @@ if __name__ == "__main__":
     wssop.point_cloud(keep_pts, keep_rgbs, alpha=0.6).add_to_scene(base.scene)
 
     robot.fk(qs=np.zeros(6, dtype=np.float32))
-    wssop.frame(pos=(0, 0, 0),
+    wssop.coord_frame(pos=(0, 0, 0),
                 rotmat=np.eye(3, dtype=np.float32)).add_to_scene(base.scene)
 
     base.run()

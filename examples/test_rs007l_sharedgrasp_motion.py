@@ -21,7 +21,7 @@ base = wvw.World(
     cam_lookat_pos=(0, 0, 0.75),
     toggle_auto_cam_orbit=False
 )
-wssop.frame().add_to_scene(base.scene)
+wssop.coord_frame().add_to_scene(base.scene)
 
 robot = khi_rs007l.RS007L()
 robot.add_to_scene(base.scene)

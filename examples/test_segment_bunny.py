@@ -4,7 +4,7 @@ from wrs import wvw, wssop, wsso, wuc, key
 
 base = wvw.World(cam_pos=(.3, .3, .3), toggle_auto_cam_orbit=True)
 
-oframe = wssop.frame()
+oframe = wssop.coord_frame()
 bunny = wsso.SceneObject.from_file(
     "bunny.stl", collision_type=wuc.CollisionType.MESH)
 oframe.add_to_scene(base.scene)

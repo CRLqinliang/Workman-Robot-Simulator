@@ -93,12 +93,12 @@ if __name__ == '__main__':
     import wrs.scene.scene_object_primitive as wssop
 
     base = wd.World(cam_pos=[.5, .5, .3], cam_lookat_pos=[0, 0, 0])
-    oframe = wssop.frame()
+    oframe = wssop.coord_frame()
     oframe.add_to_scene(base.scene)
     gripper = OAGripper()
     gripper.add_to_scene(base.scene)
     _tf = gripper.tcp('grasp_center').tf
-    tcp_frame = wssop.frame(rotmat=_tf[:3, :3],
+    tcp_frame = wssop.coord_frame(rotmat=_tf[:3, :3],
                             pos=_tf[:3, 3],
                             color_mat=wuc.CoordColor.MYC)
     tcp_frame.add_to_scene(base.scene)

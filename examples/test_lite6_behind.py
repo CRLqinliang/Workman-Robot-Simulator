@@ -47,9 +47,9 @@ if __name__ == "__main__":
     else:
         qs, tcp = found
         robot.fk(qs=qs)
-        wssop.frame(pos=tcp, rotmat=np.eye(3, dtype=np.float32)
+        wssop.coord_frame(pos=tcp, rotmat=np.eye(3, dtype=np.float32)
                     ).add_to_scene(base.scene)
 
-    wssop.frame(pos=(0, 0, 0),
+    wssop.coord_frame(pos=(0, 0, 0),
                 rotmat=np.eye(3, dtype=np.float32)).add_to_scene(base.scene)
     base.run()

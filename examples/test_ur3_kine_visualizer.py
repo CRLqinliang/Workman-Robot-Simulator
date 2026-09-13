@@ -12,7 +12,7 @@ import wrs.robots.manipulators.kawasaki.rs007l.rs007l as wrmkr7
 if __name__ == '__main__':
     base = wvw.World(cam_pos=(1.6, 1.2, 1.1), cam_lookat_pos=(0.0, 0.0, 0.3))
     scene = base.scene
-    wssop.frame().add_to_scene(scene)
+    wssop.coord_frame().add_to_scene(scene)
 
     robot = wrmuu3.UR3()
     # robot = wrmkr7.RS007L()
@@ -26,13 +26,13 @@ if __name__ == '__main__':
         robot, chain=robot.chain('main'))
     jviz.add_to_scene(scene)
     
-    wssop.frame(pos=robot.tcp('flange').tf[:3, 3], rotmat=robot.tcp('flange').tf[:3, :3],
+    wssop.coord_frame(pos=robot.tcp('flange').tf[:3, 3], rotmat=robot.tcp('flange').tf[:3, :3],
                 color_mat=wuc.CoordColor.MYC).add_to_scene(scene)
     base.run()
 
     tgt_pos = (0.35, -0.2, 0.35)
     tgt_rotmat = (wum.rotmat_from_axangle(wuc.StandardAxis.Z, np.pi / 6.0) @
                   wum.rotmat_from_axangle(wuc.StandardAxis.Y, np.pi))
-    wssop.frame(pos=tgt_pos, rotmat=tgt_rotmat).add_to_scene(scene)
+    wssop.coord_frame(pos=tgt_pos, rotmat=tgt_rotmat).add_to_scene(scene)
 
     base.run()

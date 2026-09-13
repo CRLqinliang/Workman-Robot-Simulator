@@ -205,7 +205,7 @@ if __name__ == "__main__":
     builtins.arm = arm
     builtins.hand = hand
     arm.add_to_scene(base.scene)
-    wssop.frame().add_to_scene(base.scene)
+    wssop.coord_frame().add_to_scene(base.scene)
     arm.toggle_tcp('flange')
 
     base.run()

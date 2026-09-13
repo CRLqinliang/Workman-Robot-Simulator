@@ -42,7 +42,7 @@ if __name__ == '__main__':
     base = wd.World(cam_pos=(2,0.5,2), cam_lookat_pos=(0, 0, .75))
     builtins.base=base
     # world frame
-    wssop.frame().add_to_scene(base.scene)
+    wssop.coord_frame().add_to_scene(base.scene)
     manipulator = rs007l.RS007L()
     manipulator.add_to_scene(base.scene)
     manipulator.alpha=.3
@@ -53,14 +53,14 @@ if __name__ == '__main__':
                       wum.tf_from_pos_rotmat(pos=(0.0, 0.0, 0.05)), update=True)
     tgt_pos = (0.3, 0.5, 0.5)
     tgt_rotmat = wum.rotmat_from_axangle(wuc.StandardAxis.Y, np.pi)
-    wssop.frame(pos=tgt_pos, rotmat=tgt_rotmat, color_mat=wuc.CoordColor.DYO).add_to_scene(base.scene)
+    wssop.coord_frame(pos=tgt_pos, rotmat=tgt_rotmat, color_mat=wuc.CoordColor.DYO).add_to_scene(base.scene)
     _sols = manipulator.ik(tgt_pos, tgt_rotmat, tcp=screwdriver.tcp('tip'), max_solutions=1)
     qs = _sols[0] if _sols else None
     print(qs)
     manipulator.fk(qs)
     _tf = screwdriver.tcp('tip').tf
-    wssop.frame(pos=_tf[:3, 3],
+    wssop.coord_frame(pos=_tf[:3, 3],
                 rotmat=_tf[:3, :3],
                 color_mat=wuc.CoordColor.MYC).add_to_scene(base.scene)
-    wssop.frame(pos=screwdriver.pos, rotmat=screwdriver.rotmat).add_to_scene(base.scene)
+    wssop.coord_frame(pos=screwdriver.pos, rotmat=screwdriver.rotmat).add_to_scene(base.scene)
     base.run()

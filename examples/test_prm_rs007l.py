@@ -4,7 +4,7 @@ from wrs import wum, wvw, wuc, wssop, wcm, wmppc, wmpp, khi_rs007l
 
 base = wvw.World(cam_pos=(-2, 2, 2), cam_lookat_pos=(0, 0, 0.5))
 builtins.base = base
-oframe = wssop.frame()
+oframe = wssop.coord_frame()
 oframe.add_to_scene(base.scene)
 robot = khi_rs007l.RS007L()
 robot.rotmat = wum.rotmat_from_euler(0, 0, -wum.pi / 2)

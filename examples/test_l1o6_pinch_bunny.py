@@ -117,11 +117,11 @@ def main():
     import wrs.viewer.key as key
 
     base = wvw.World(cam_pos=(2.0, 1.2, 1.6), cam_lookat_pos=(0.3, 0.1, 0.95))
-    wssop.frame().add_to_scene(base.scene)
+    wssop.coord_frame().add_to_scene(base.scene)
     for e in (robot, table, bunny, ground):
         e.add_to_scene(base.scene)
-    wssop.frame(pos=pick_pose[:3, 3], rotmat=pick_pose[:3, :3]).add_to_scene(base.scene)
-    wssop.frame(pos=place_pose[:3, 3], rotmat=place_pose[:3, :3]).add_to_scene(base.scene)
+    wssop.coord_frame(pos=pick_pose[:3, 3], rotmat=pick_pose[:3, :3]).add_to_scene(base.scene)
+    wssop.coord_frame(pos=place_pose[:3, 3], rotmat=place_pose[:3, :3]).add_to_scene(base.scene)
     print('N = next grasp   F = step one frame   G = play/pause   R = reset')
 
     hand = robot.left_hand

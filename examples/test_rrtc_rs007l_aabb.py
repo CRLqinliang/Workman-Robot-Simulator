@@ -9,7 +9,7 @@ base = wvw.World(
     toggle_auto_cam_orbit=False)
 builtins.base = base
 # Add coordinate frame
-oframe = wssop.frame()
+oframe = wssop.coord_frame()
 oframe.add_to_scene(base.scene)
 # Create robot
 robot = khi_rs007l.RS007L()

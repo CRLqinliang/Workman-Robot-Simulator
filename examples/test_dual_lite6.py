@@ -29,5 +29,5 @@ if __name__ == "__main__":
     left.fk(qs=ready)
     right.fk(qs=ready)
 
-    wssop.frame().add_to_scene(base.scene)
+    wssop.coord_frame().add_to_scene(base.scene)
     base.run()

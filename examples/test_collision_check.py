@@ -5,7 +5,7 @@ from wrs import wum, wvw, wssop, khi_rs007l, or_2fg7
 # Simple test to verify robot-ground collision detection
 base = wvw.World(cam_pos=(2, 2, 1.5), cam_lookat_pos=(0, 0, .75),
                  toggle_auto_cam_orbit=False)
-wssop.frame().add_to_scene(base.scene)
+wssop.coord_frame().add_to_scene(base.scene)
 
 robot = khi_rs007l.RS007L(pos=(.5, 0, 0.01))
 robot.add_to_scene(base.scene)

@@ -92,7 +92,7 @@ def build_table():
 def main():
     base = wvw.World(cam_pos=(1.2, 0.8, 1.5), cam_lookat_pos=(0.0, 0.0, 0.9))
     builtins.base = base
-    wssop.frame().add_to_scene(base.scene)
+    wssop.coord_frame().add_to_scene(base.scene)
 
     robot = L1O6CvxHull()
     robot.fk(qs=np.zeros(robot.qs.shape, dtype=np.float32))

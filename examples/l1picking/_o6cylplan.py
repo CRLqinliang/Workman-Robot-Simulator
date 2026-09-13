@@ -56,7 +56,7 @@ def plan_save_show(cyl, out_json, label, primitive='pinch'):
 
     base = wvw.World(cam_pos=(0.18, 0.0, 0.06), cam_lookat_pos=(0.0, 0.0, 0.04))
     builtins.base = base
-    wssop.frame(length_scale=0.3).add_to_scene(base.scene)
+    wssop.coord_frame(length_scale=0.3).add_to_scene(base.scene)
     cyl.add_to_scene(base.scene)
     jaw_open = float(jaw.jaw_range[1])
     jaw_pose = hand.as_jaw(primitive)

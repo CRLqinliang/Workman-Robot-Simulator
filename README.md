@@ -3,22 +3,33 @@
 A self-contained robotics library — kinematics, scene, mesh geometry, collision,
 grasp planning, motion planning, and a viewer.
 
+<p align="center">
+  <img src="docs/images/onestroke_wrs.gif" width="560"
+       alt="A Franka Research 3 drawing the letters WRS in a single continuous stroke">
+</p>
+
+<p align="center">
+  <sub>A Franka Research 3 writing <b>WRS</b> in one continuous stroke — planned and
+  simulated in this library. Video by Xinyi Yuan.</sub>
+</p>
+
 ## Lineage
 
 WRS is the third generation of this codebase:
 
-| Generation | Renderer | Repository |
+| Generation | Graphics | Repository |
 |---|---|---|
 | 1st | Panda3D | [wanweiwei07/wrs](https://github.com/wanweiwei07/wrs) |
-| 2nd | Pyglet / OpenGL | [wanweiwei07/one](https://github.com/wanweiwei07/one) |
+| 2nd | Pyglet | [wanweiwei07/one](https://github.com/wanweiwei07/one) |
 | **3rd (this one)** | **WGPU** | — |
 
-The rewrite is motivated by OpenGL's inherent limitations in how the CPU and the
-GPU interact: state is global and implicit, buffer uploads and draw submission
-are hard to separate, and validation happens per call rather than once. WGPU
-replaces that with explicit pipelines, command buffers, and up-front validation,
-so the renderer builds its state once and the per-frame work is just recording
-draws.
+The first two are both OpenGL underneath — Panda3D and Pyglet only differ in how
+much they wrap it. The rewrite is motivated by OpenGL's inherent limitations in
+how the CPU and the GPU interact: state is global and implicit, buffer uploads
+and draw submission are hard to separate, and validation happens per call rather
+than once. WGPU replaces that with explicit pipelines, command buffers, and
+up-front validation, so the renderer builds its state once and the per-frame
+work is just recording draws.
 
 ## Architecture: one server, two clients
 
@@ -42,7 +53,7 @@ code; calling `run()` connects to the server and starts publishing.
 from wrs import wvw, wssop, wsso
 
 base = wvw.World(cam_pos=(.3, .3, .3))
-wssop.frame().add_to_scene(base.scene)
+wssop.coord_frame().add_to_scene(base.scene)
 wsso.SceneObject.from_file("bunny.stl").add_to_scene(base.scene)
 base.run()
 ```
